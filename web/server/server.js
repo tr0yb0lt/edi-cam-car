@@ -1,15 +1,15 @@
 var m = require('mraa'); //require mraa
 console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console
 
-var trigPin = new m.Gpio(2);
-var echoPin = new m.Gpio(3);
-var led = new m.Gpio(12);
-var led2 = new m.Gpio(11);
-var ledwhite = new m.Gpio(13);
-var LMotorIN  = new m.Gpio(4);
-var LMotorOUT  = new m.Gpio(5);
-var RMotorIN  = new m.Gpio(6);
-var RMotorOUT = new m.Gpio(7);
+var trigPin = new mraa.Gpio(2);
+var echoPin = new mraa.Gpio(3);
+var led = new mraa.Gpio(12);
+var led2 = new mraa.Gpio(11);
+var ledwhite = new mraa.Gpio(13);
+var LMotorIN  = new mraa.Gpio(4);
+var LMotorOUT  = new mraa.Gpio(5);
+var RMotorIN  = new mraa.Gpio(6);
+var RMotorOUT = new mraa.Gpio(7);
 
 trigPin.dir(m.DIR_OUT);
 echoPin.dir(m.DIR_OUT);
