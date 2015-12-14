@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1"/>
+  <title>edi-cam</title>
+  <style type="text/css">
+    .container {
+      margin-top: 10%;
+      text-align: center;
+    }
+
+    #canvas-video {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ccc;
+    }
+
+    body {background-color: #e5f2ff;}
+
+    .site-footer {background-color:#00ff00;color:#ff6666;clear:both;text-align:center;padding:5px;}
+
+    .myButton {background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5));background:-moz-linear-gradient(top, #79bbff 5%, #378de5 100%);background:-webkit-linear-gradient(top, #79bbff 5%, #378de5 100%);background:-o-linear-gradient(top, #79bbff 5%, #378de5 100%);background:-ms-linear-gradient(top, #79bbff 5%, #378de5 100%);background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5',GradientType=0);background-color:#79bbff;-moz-border-radius:17px;-webkit-border-radius:17px;border-radius:17px;border:1px solid #84bbf3;display:inline-block;cursor:pointer;color:#ffffff;font-family:Arial;font-size:20px;font-weight:bold;text-decoration:none;padding :10px;text-shadow:0px 5px 0px #528ecc;}
+
+    .myButton:hover {background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff));background:-moz-linear-gradient(top, #378de5 5%, #79bbff 100%);background:-webkit-linear-gradient(top, #378de5 5%, #79bbff 100%);background:-o-linear-gradient(top, #378de5 5%, #79bbff 100%);background:-ms-linear-gradient(top, #378de5 5%, #79bbff 100%);background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff',GradientType=0);background-color:#378de5;}
+
+    .myButton:active {position:absolute;padding-top:15px;}
+  </style>
+</head>
+<body>
+  <!-- Reference: https://github.com/phoboslab/jsmpeg/blob/master/stream-example.html -->
+
+  <div class="container">
+    <!--
+      The canvas size specified here is the "initial" internal resolution. jsmpeg will
+      change this internal resolution to whatever the source provides. The size the
+      canvas is displayed on the website is dictated by the CSS style.
+    -->
+    <canvas id="canvas-video" width="640" height="480"></canvas>
+      <a href='F' class='myButton' id ='foward-button' style='bottom:100px; left: 80px; position: absolute;'>Foward</a></br>
+<a href='L' class='myButton' id ='left-button' style='bottom:40px; left: 20px; position: absolute; padding-left: 20px;padding-right: 25px;'>Left</a>
+<a href='R' class='myButton' id ='right-button' style='bottom:40px; left: 150px; position: absolute; padding-left: 20px;padding-right: 20px;'>Right</a>
+<a href='B' class='myButton' id ='back-button' style='bottom:-20px;left: 80px; position: absolute; padding-left: 20px;padding-right: 20px;'>Back</a>
+<a href='BRAKE' class='myButton' id ='brake-button'  style='bottom:60px; right: 20px; position: absolute; padding-left: 20px;padding-right: 20px;'>Brake</a>
+<a href='LIGHT' class='myButton' id ='light-button' style='bottom:00px; right: 100px; position: absolute; padding-left: 20px;padding-right: 20px;'>LIGHT</a>
+  </div>
+
+  <script src="/jsmpg.js"></script>
+  <script src="/socket.js"></script>
+  <script type="text/javascript">
+    // CHANGE THIS TO THE APPROPRIATE WS ADDRESS
+    var wsUrl = 'ws://edison.local:8084/';
+
+    // Show loading notice
+    var canvas = document.getElementById('canvas-video');
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#333';
+    ctx.fillText('Loading...', canvas.width/2-30, canvas.height/3);
+
+    // Start the player
+    var client = new WebSocket(wsUrl);
+    var player = new jsmpeg(client, { canvas:canvas });
+  </script>
+</body>
+</html>
